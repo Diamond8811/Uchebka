@@ -1,0 +1,79 @@
+﻿<Page x:Class="Uchebka.Pages.PartnersListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Uchebka.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Список партнёров">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="5" TextChanged="SearchTextBox_TextChanged"/>
+            <TextBlock Text="Тип бизнеса:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox x:Name="TypeFilterComboBox" Width="150" Margin="5" SelectionChanged="TypeFilterComboBox_SelectionChanged" DisplayMemberPath="NameBusiness"/>
+            <Button Content="Сбросить" Click="ResetFilters_Click" Margin="5"/>
+        </StackPanel>
+
+        <ListView x:Name="PartnersLV" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <Grid Margin="5" Width="700">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Text="{Binding TypeOfBusiness.NameBusiness}"/>
+                                <TextBlock Text=" | "/>
+                                <TextBlock Text="{Binding NamePartner}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="{Binding SurnameDirector}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding NameDirector}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding PatronumicDirector}"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="2" Text="{Binding Phone}"/>
+
+                            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                <TextBlock Text="Рейтинг:"/>
+                                <TextBlock Text="{Binding Raiting}"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Margin="0,0,5,0" Text="{Binding SizeDiscount}"/>
+
+                            <Button Grid.Column="1" Grid.Row="3" Content="История" Width="100" Height="40" HorizontalAlignment="Right" Click="HistoryButton_Click" Tag="{Binding}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="AddBtn" Content="Добавить" Click="AddBtn_Click"/>
+            <Button x:Name="DeleteBtn" Content="Удалить" Background="Red" Click="DeleteBtn_Click"/>
+            <Button x:Name="EditBtn" Content="Редактировать" Click="EditBtn_Click"/>
+            <Button x:Name="BackBtn" Content="Назад" Background="White" Foreground="#355CBD" Click="BackBtn_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Page>
